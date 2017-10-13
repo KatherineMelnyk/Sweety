@@ -26,7 +26,7 @@ Number::Number() {
 }
 
 Number::Number(unsigned long MAXLEN) {
-	Coef = new int[MAXLEN];//виділяємо пам`ять під MAXLEN чисел
+	Coef = new int[MAXLEN];//ГўГЁГ¤ВіГ«ГїВєГ¬Г® ГЇГ Г¬`ГїГІГј ГЇВіГ¤ MAXLEN Г·ГЁГ±ГҐГ«
 	Maxsize = MAXLEN;
 	size = 0;
 }
@@ -48,7 +48,7 @@ void Number::zero() {
 	for (unsigned int i = 0; i < Maxsize; i++)
 		Coef[i] = 0;
 	size = 1; 
-}//занулили значення num.zero()
+}//Г§Г Г­ГіГ«ГЁГ«ГЁ Г§Г­Г Г·ГҐГ­Г­Гї num.zero()
 
 Number::operator long() {
 	long tmp = 0;
@@ -107,11 +107,18 @@ void Add(const Number&A, const Number&B, Number&C) {
 	}
 }
 
+int no_of_errors;
+double error(const char*s) {
+	cerr << "Error:" << s << "\n";
+	no_of_errors++;
+	return 1;
+}
+
 int Sub(const Number&A, const Number&B, Number&C) {
 	unsigned long int temp;
 	const int *a = A.Coef, *b = B.Coef;
 	int *c = C.Coef, carry = 0;
-	//обробити ще один випадок
+	if (A.size < B.size) error("Big submision : size error");
 	for (unsigned int i = 0; i<B.size; i++) {
 		temp = a[i] - b[i] + carry;
 		if (temp < 0) {
